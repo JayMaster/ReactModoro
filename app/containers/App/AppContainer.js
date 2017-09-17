@@ -1,14 +1,13 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { ReactModoroNavigator } from '~/containers'
 import { PreSplash } from '~/components' // why directly from Components? -- when do I need a container?
 
-const isAuthenticating = false;
-
 class AppContainer extends Component {
-	static propTypes = {
-		isAuthenticating: PropTypes.bool,
+	static PropTypes = { // does this work?
+		isAuthenticating: PropTypes.bool.isRequired,
 	}
 
 	render() {
@@ -23,17 +22,12 @@ class AppContainer extends Component {
 	}
 }
 
-/*function mapStateToProps ({authentication}) {
+function mapStateToProps ({authentication}) {
 	return {
+		// what we return from mapStateToProps is an object
+		// whatever properties that we add here (in the return), will go in as props to our component
 		isAuthenticating: authentication.isAuthenticating
 	}
-	// what we return from mapStateToProps is an object
-	// whatever properties that we add here (in the return), will go in as props to our component
-} */
+} 
 
-/*export default connect(
-	mapStateToProps
-)(AppContainer)
-*/
-
-export default AppContainer;
+export default connect(mapStateToProps)(AppContainer)
