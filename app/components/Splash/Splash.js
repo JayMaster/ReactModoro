@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions, Button } from 'react-native'
 import { LoginButton } from 'react-native-fbsdk'
 import { colors, fontSizes } from '~/styles'
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation'
 
 const { height } = Dimensions.get('window');
 
-Splash.PropTypes = {
-  onLoginFinished: PropTypes.func.isRequired
-}
+/*Splash.PropTypes = {
+  onLoginFinished: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
+} */
 
-export default function Splash (props) {
-  return (
+const Splash = (props, { dispatch }) => (
     <View style = {styles.container}>
       <View>
         <Image style={styles.image} source={require('../../images/logo.png')} />
@@ -28,9 +30,27 @@ export default function Splash (props) {
         />
         <Text style={styles.assuranceText}>Don't worry. We don't post anything to Facebook.</Text>
       </View>
+      {/*
+      <Button
+        onPress={() =>
+          props.navigation.dispatch({ type: 'goToSample' })}
+        title="Go to Sample"
+      />
+    */}
     </View>
-  )
-}
+)
+
+const mapStateToProps = authentication => ({
+  isAuthenticating: authentication.isAuthenticating
+});
+
+export default connect(mapStateToProps)(Splash);
+
+/*const mapStateToProps = state => ({
+
+}) */
+
+//export default connect(mapStateToProps)(Splash)
 
 
 const styles = StyleSheet.create({
