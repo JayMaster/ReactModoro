@@ -30,11 +30,13 @@ const Splash = (props, { dispatch }) => (
         />
         <Text style={styles.assuranceText}>Don't worry. We don't post anything to Facebook.</Text>
       </View>
+      {/*
       <Button
         onPress={() =>
           props.navigation.dispatch({ type: 'goToSample' })}
         title="Go to Sample"
       />
+    */}
     </View>
 )
 

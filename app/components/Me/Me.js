@@ -1,14 +1,19 @@
 import React, { PropTypes, Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
+import { connect } from 'react-redux'
 
-export default class Me extends Component {
+class Me extends Component {
   render () {
     return (
       <View>
-        <Text>
-          Me
-        </Text>
+      	<Text>Me</Text>
       </View>
     )
   }
 }
+
+const mapStateToProps = authentication => ({
+  isAuthenticating: authentication.isAuthenticating
+});
+
+export default connect(mapStateToProps)(Me);

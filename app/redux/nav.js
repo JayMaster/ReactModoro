@@ -7,16 +7,18 @@ export default (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 
+		/* // this is an example of how to do a simple route change
 		case 'goToSample':
 			newState = MainNavigator.router.getStateForAction(
-				NavigationActions.navigate({ routeName: 'Home' }),
+				NavigationActions.navigate({ routeName: 'Sample' }),
 				state
 			);
 			break;
+		*/
 
-		case 'goToVittel': 
+		case 'authSuccess':
 			newState = MainNavigator.router.getStateForAction(
-				NavigationActions.navigate({ routeName: 'Vittel' }),
+				NavigationActions.navigate({ routeName: 'Leaderboard' }),
 				state
 			);
 			break;
