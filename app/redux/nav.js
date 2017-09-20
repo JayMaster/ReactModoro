@@ -3,22 +3,20 @@ import MainNavigator from '~/config/routes.js';
 
 const initialState = MainNavigator.router.getStateForAction(NavigationActions.init());
 
+function isAuthed(uid) {
+	return {
+		type: IS_AUTHED,
+		uid
+	}
+}
+
 export default (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 
-		/* // this is an example of how to do a simple route change
-		case 'goToSample':
+		case 'IS_AUTHED': // this comes from the auth reducer
 			newState = MainNavigator.router.getStateForAction(
-				NavigationActions.navigate({ routeName: 'Sample' }),
-				state
-			);
-			break;
-		*/
-
-		case 'authSuccess':
-			newState = MainNavigator.router.getStateForAction(
-				NavigationActions.navigate({ routeName: 'Leaderboard' }),
+				NavigationActions.navigate({ routeName: 'Home' }),
 				state
 			);
 			break;

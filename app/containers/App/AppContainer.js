@@ -33,6 +33,6 @@ function mapStateToProps ({authentication}) {
 		// whatever properties that we add here (in the return), will go in as props to our component
 		isAuthenticating: authentication.isAuthenticating
 	}
-} 
+}
 
 export default connect(mapStateToProps)(AppContainer)

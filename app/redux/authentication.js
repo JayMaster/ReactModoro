@@ -25,7 +25,7 @@ function isAuthed(uid) {
 
 export function handleAuthWithFirebase () {
 	return function (dispatch, getState) {
-		dispatch(authenicating());
+		dispatch(authenticating());
 		return getAccessToken()
 			.then(({accessToken}) => authWithToken(accessToken))
 			// .catch((error)) => console.warn('Error in handleAuthWithFirebase: ', error)
@@ -35,7 +35,7 @@ export function handleAuthWithFirebase () {
 export function onAuthChange (user) {
 	return function (dispatch) {
 		if (!user) {
-			dispatch(notAuthed())
+			dispatch(notAuthed()) // not authenticated
 		} else {
 			const { providerData, uid } = user
 			dispatch(isAuthed(uid))
