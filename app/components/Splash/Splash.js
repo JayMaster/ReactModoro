@@ -13,6 +13,7 @@ const { height } = Dimensions.get('window');
   dispatch: PropTypes.func.isRequired
 } */
 
+/*
 const Splash = (props, { dispatch }) => (
     <View style = {styles.container}>
       <View>
@@ -30,19 +31,53 @@ const Splash = (props, { dispatch }) => (
         />
         <Text style={styles.assuranceText}>Don't worry. We don't post anything to Facebook.</Text>
       </View>
-      {/*
-      <Button
-        onPress={() =>
-          props.navigation.dispatch({ type: 'goToSample' })}
-        title="Go to Sample"
-      />
-    */}
     </View>
 )
+*/
 
-const mapStateToProps = authentication => ({
-  isAuthenticating: authentication.isAuthenticating
-});
+class Splash extends Component {
+  constructor (props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthed) {
+      console.log('this.props: ' , this.props);
+      // this.props.dispatch({ type: 'authSuccess' })
+    }
+  }
+
+  render () {
+    return (
+      <View style = {styles.container}>
+      <View>
+        <Image style={styles.image} source={require('../../images/logo.png')} />
+        <Text style={styles.slogan}>ReactModoro</Text>
+      </View>
+      <View style={styles.loginContainer}>
+        <LoginButton
+        style = {{
+          height: 30,
+          width: 100,
+          marginBottom: 15
+        }}
+          onLoginFinished={this.props.onLoginFinished}
+        />
+        <Text style={styles.assuranceText}>Don't worry. We don't post anything to Facebook.</Text>
+      </View>
+    </View>
+    )
+  }
+}
+
+function mapStateToProps ({authentication}) {
+  return {
+    // what we return from mapStateToProps is an object
+    // whatever properties that we add here (in the return), will go in as props to our component
+    isAuthed: authentication.isAuthed,
+    isAuthenticating: authentication.isAuthenticating
+  }
+}
 
 export default connect(mapStateToProps)(Splash);
 

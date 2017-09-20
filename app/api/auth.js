@@ -7,5 +7,5 @@ export function getAccessToken () {
 
 export function authWithToken(accessToken) {
 	return firebaseAuth
-		.signInWithCredentials(facebookProvider.credential(accessToken))
+		.signInWithCredential(facebookProvider.credential(accessToken))
 }

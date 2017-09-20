@@ -6,12 +6,7 @@ import { connect } from 'react-redux'
 function Home (props) {
   return (
     <View>
-      <Button
-    	onPress={() => {
-    		props.navigation.dispatch({ type: 'authSuccess' })
-    	}}
-    	title = "authSuccess"
-        />
+      <Text>This is Home.</Text>
     </View>
   )
 }
