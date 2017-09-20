@@ -1,3 +1,4 @@
 export ReactModoroNavigator from './Navigator/ReactModoroNavigator'
-export SplashContainer from './Splash/SplashContainer'
 export AppContainer from './App/AppContainer'
+export SplashContainer from './Splash/SplashContainer'
+export SampleContainer from './Sample/SampleContainer'

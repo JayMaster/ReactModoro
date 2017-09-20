@@ -2,23 +2,22 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import { Splash } from '~/components';
+import { SplashContainer } from '~/containers' // why does this not work
+import { SampleContainer } from '~/containers/Sample/SampleContainer.js'
+// import { Splash } from '~/components'
 import { Me } from '~/components';
-import { Sample } from '~/components';
+// import { Sample } from '~/components';
 import { Home } from '~/components';
 import { Leaderboard } from '~/components'
 
-/*
 const MainNavigator = StackNavigator({
-	Splash: {
-		screen: Splash
-	},
 	Sample: {
-		screen: Sample
+		screen: SampleContainer
 	}
 });
-*/
 
+
+/*
 const MainNavigator = TabNavigator({
 	Home: {
 		screen: Home,
@@ -36,5 +35,6 @@ const MainNavigator = TabNavigator({
 		}
 	}
 })
+*/
 
 export default MainNavigator;
