@@ -14,6 +14,27 @@ export default (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 
+		case 'LOGGING_OUT':
+			newState = MainNavigator.router.getStateForAction(
+				NavigationActions.navigate({ routeName: 'Splash' }),
+				state
+			);
+			break;
+
+		case 'GO_BACK': // this is built manually and has nothing to do with the pre-built back button in iOS
+			newState = MainNavigator.router.getStateForAction(
+				NavigationActions.back(),
+				state
+			);
+			break;
+
+		case 'TO_SETTINGS': // this comes from the auth reducer
+			newState = MainNavigator.router.getStateForAction(
+				NavigationActions.navigate({ routeName: 'Settings' }),
+				state
+			);
+			break;
+
 		case 'IS_AUTHED': // this comes from the auth reducer
 			newState = MainNavigator.router.getStateForAction(
 				NavigationActions.navigate({ routeName: 'Home' }),

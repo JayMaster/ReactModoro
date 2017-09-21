@@ -8,8 +8,9 @@ import { Icon } from 'react-native-elements';
 // import SampleContainer from '~/containers'
 import SplashContainer from '../containers/Splash/SplashContainer.js'
 import { Me } from '~/components';
-import { Home } from '~/components';
+import Home from '../containers/Home/HomeContainer.js';
 import { Leaderboard } from '~/components'
+import Settings from '../containers/Settings/SettingsContainer.js'
 
 import { NavigationActions } from 'react-navigation';
 
@@ -27,6 +28,8 @@ const resetNav = NavigationActions.reset({
 });
 */
 
+
+
 const HomeTabs = TabNavigator({
 	Home: {
 		screen: Home,
@@ -34,7 +37,8 @@ const HomeTabs = TabNavigator({
 		navigationOptions: {
 			tabBarLabel: 'Home',
 			tabBarIcon: ({ tintColor }) => <Icon name="ios-home-outline" type="ionicon" size={35} color={tintColor} />,
-			headerLeft: null // disable back button
+			header: null
+			// headerLeft: null // this would be to disable the back button
 		}
 	},
 	Leaderboard: {
@@ -42,17 +46,44 @@ const HomeTabs = TabNavigator({
 		navigationOptions: {
 			tabBarLabel: 'Leaderboard',
 			tabBarIcon: ({ tintColor }) => <Icon name="ios-trophy-outline" type="ionicon" size={35} color={tintColor} />,
-			headerLeft: null // disable back button
+			header: null
+			// headerLeft: null // this would be to disable the back button
 		}
 	}
 })
+
+/* I think I'll have a problem as soon as I add another Route to HomeNav,
+because I set the transition mode to modal, but I think every route
+that is added to HomeNav will now take this property, meaning that 
+everything will swipe up from the bottom. A possible workaround might be to
+create something like a 'EverythingButSettings' StackNavigator, which won't
+have mode: 'modal' and then refer to EverythingButSettings instead of HomeTabs.
+
+*/
+const HomeNav = StackNavigator({
+	Home: {
+		screen: HomeTabs
+	},
+	Settings: {
+		screen: Settings,
+		navigationOptions: {
+			header: null
+		}
+	}},
+	{
+		mode: 'modal'
+	}
+)
 
 const MainNavigator = StackNavigator({
 	Splash: {
 		screen: SplashContainer,
 	},
 	Home: {
-		screen: HomeTabs,
+		screen: HomeNav,
+		navigationOptions: {
+			gesturesEnabled: false // disable swipe back to Splash
+		}
 	}}/*, {
 		initialRouteName: this.props.isAuthed ? 'Home' : 'Splash',
 		// headerMode: 'none'

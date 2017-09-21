@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { View, Text } from 'react-native'
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator, SettingsContainer } from 'react-navigation'
 
 import { addNavigationHelpers } from 'react-navigation'
 import { Provider, connect } from 'react-redux'

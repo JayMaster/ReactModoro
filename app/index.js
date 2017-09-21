@@ -6,6 +6,9 @@ import thunk from 'redux-thunk'
 // import * as reducers from './redux'
 import store from '~/store'; // combineReducers already happened in redux/index.js
 
+
+// const appReducer = 
+
 /* const store = createStore(
 	combineReducers(reducers),
 	applyMiddleware(thunk)
