@@ -42,7 +42,6 @@ class Splash extends Component {
 
   componentDidMount() {
     if (this.props.isAuthed) {
-      console.log('this.props: ' , this.props);
       // this.props.dispatch({ type: 'authSuccess' })
     }
   }
