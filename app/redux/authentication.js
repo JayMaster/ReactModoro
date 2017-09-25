@@ -1,4 +1,6 @@
 import { getAccessToken, authWithToken, updateUser, logout } from '~/api/auth'
+import { fetchSettings } from '~/api/settings'
+import { addSettingsTimerDuration, addSettingsRestDuration } from '~/redux/settings'
 
 const AUTHENTICATING = 'AUTHENTICATING'
 const NOT_AUTHED = 'NOT_AUTHED'
@@ -50,7 +52,13 @@ export function onAuthChange (user) {
 				uid,
 				displayName,
 				photoURL
-			}).then(() => dispatch(isAuthed(uid))) //
+			})
+			.then(() => fetchSettings(uid))
+			.then((settings) => Promise.all([
+				dispatch(addSettingsTimerDuration(settings.timerDuration)),
+				dispatch(addSettingsRestDuration(settings.restDuration))
+			]))
+			.then(() => dispatch(isAuthed(uid))) //
 			// .then because firebase returns promise
 		}
 	}

@@ -4,18 +4,18 @@ import { Settings } from '~/components'
 import { connect } from 'react-redux'
 import { handleUnauth } from '~/redux/authentication'
 import { showFlashNotification } from '~/redux/flashNotification'
+import { handleAndUpdateTimer, handleAndUpdateRest } from '~/redux/settings'
+
 
 class SettingsContainer extends Component {
-  static propTypes = {}
+  static propTypes = {
+    timerDuration: PropTypes.number.isRequired,
+    restDuration: PropTypes.number.isRequired
+  }
 
-  /*
-  in this case, using Redux wouldn't make a lot of sense, since
-  the settings are saved in firebase and apart from this file,
-  nowhere else in the app
-  */
   state = {
-    timerDuration: 20,
-    restDuration: 5,
+    timerDuration: this.props.timerDuration,
+    restDuration: this.props.restDuration,
   }
 
   handleTimerChange = (timerDuration) => {
@@ -26,12 +26,17 @@ class SettingsContainer extends Component {
   }
   
   handleTimerComplete = () => {
-    this.props.dispatch(showFlashNotification({text: 'Duration Saved!'}))
+    this.props.dispatch(handleAndUpdateTimer(this.state.timerDuration)) // this returns a promise
+      .then(() => {this.props.dispatch(showFlashNotification({text: 'Duration Saved!'}))})
+      .catch(() => {this.props.dispatch(showFlashNotification({text: 'Error updating Timer Duration!'}))})
   }
   
   handleRestComplete = () => {
-    console.log('Finished Sliding Rest Timer')
-  }
+    this.props.dispatch(handleAndUpdateRest(this.state.restDuration))
+      .then(() => {this.props.dispatch(showFlashNotification({text: 'Duration Saved!'}))})
+      .catch(() => {this.props.dispatch(showFlashNotification({text: 'Error updating Timer Duration!'}))})
+}
+
   handleLogout = () => {
     this.props.dispatch(handleUnauth()) // handleUnauth is in authentication redcuer
   }
@@ -56,4 +61,11 @@ class SettingsContainer extends Component {
   }
 }
 
-export default connect()(SettingsContainer)
+function mapStateToProps ({settings}) {
+  return {
+    timerDuration: settings.timerDuration,
+    restDuration: settings.restDuration
+  }
+}
+
+export default connect(mapStateToProps)(SettingsContainer)
